@@ -43,7 +43,7 @@
                             <div class="dropdown-menu" area-labelledby="navbarDropDownMenuLink">
                                 <a class="dropdown-item" asp-action="Index" asp-controller="Category" asp-area="Admin">Category</a>
                                 <a class="dropdown-item" asp-action="Index" asp-controller="SubCategory" asp-area="Admin">Sub Category</a>
-                                <a class="dropdown-item">Menu Items</a>
+                                <a class="dropdown-item" asp-action="Index" asp-controller="MenuItem" asp-area="Admin">Menu Items</a>
                                 <a class="dropdown-item">Coupons</a>
                                 <a class="dropdown-item">Users</a>
 
@@ -76,6 +76,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <script src="~/js/jquery-ui.js"></script>
+        <script src="https://cdn.tiny.cloud/1/js11fq8i8gwfmm9ovrjkqp5umro77r8i092ptzee7zhadj4r/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=n94ifuzvl80pchikopiwgz2esrw8n28dwcywvpejlqrregfp"></script>
@@ -92,6 +93,7 @@
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
         <script src="~/js/jquery-ui.js"></script>
+        <script src="https://cdn.tiny.cloud/1/js11fq8i8gwfmm9ovrjkqp5umro77r8i092ptzee7zhadj4r/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
