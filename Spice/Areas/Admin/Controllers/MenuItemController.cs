@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Spice.Utility;
 
 namespace Spice.Areas.Admin.Controllers
 {
+    [Authorize(Roles = StaticDetails.ManagerUser)]
     [Area("Admin")]
     public class MenuItemController : Controller
     {
@@ -142,7 +144,7 @@ namespace Spice.Areas.Admin.Controllers
             }
 
             menuItem.Name = MenuItemVM.MenuItem.Name;
-            menuItem.Description = MenuItemVM.MenuItem.Name;
+            menuItem.Description = MenuItemVM.MenuItem.Description;
             menuItem.Price = MenuItemVM.MenuItem.Price;
             menuItem.Spicyness = MenuItemVM.MenuItem.Spicyness;
             menuItem.CategoryId = MenuItemVM.MenuItem.CategoryId;

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Spice.Data;
 using Spice.Models;
+using Spice.Utility;
 
 namespace Spice.Areas.Admin.Controllers
 {
+    [Authorize(Roles =StaticDetails.ManagerUser)]
     [Area("Admin")]
     public class CategoryController : Controller
     {
