@@ -1915,7 +1915,7 @@ pre code {
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: white;
   opacity: 1;
 }
 
@@ -5908,7 +5908,7 @@ a.close.disabled {
 
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 70%;
     margin: 1.75rem auto;
   }
   .modal-dialog-scrollable {

@@ -25,6 +25,7 @@ namespace Spice.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        //Managing the roles
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(

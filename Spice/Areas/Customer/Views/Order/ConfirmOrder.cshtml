@@ -1,0 +1,38 @@
+﻿@model Spice.Models.ViewModels.OrderDetailsViewModel
+@using Spice.Utility
+@{
+    ViewData["Title"] = "ConfirmOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="backgroundWhite">
+    @if (Model.OrderHeader != null && Model.OrderHeader.PaymentStatus != StaticDetails.PaymentStatusRejected)
+    {
+        <div class="row px-3">
+            <div class="col-8">
+                <h2 class="text-info">Order Confirmed</h2>
+            </div>
+            <div class="col-4 text-right">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-success form-control">New Order</a>
+            </div>
+        </div>
+
+        <div style="color:maroon;" class="p-3">
+            Your order has been confirmed! Please see the order summery below.
+            <br />
+            Feel free to contact with us if you have any quetions.
+        </div>
+        <partial name="_IndividualOrderDetailsPartial" model="Model" />
+    }
+    else
+    {
+<div class="alert alert-danger">
+    <strong> Error... Please try Again</strong><br />
+    <span class="text-danger">Payment Status:@Model.OrderHeader.PaymentStatus</span>
+</div>
+        <div class="text-danger"></div>
+    }
+</div>
+
+

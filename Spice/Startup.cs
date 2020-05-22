@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Spice.Services;
+using Spice.Utility;
+using Stripe;
+using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace Spice
 {
@@ -38,8 +41,11 @@ namespace Spice
             services.AddIdentity<IdentityUser, IdentityRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             //Add Email Service
-            services.AddSingleton<IEmailSender,EmailSender>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
+            
 
             services.AddControllersWithViews();
             //Runtime Compilation 
@@ -50,6 +56,21 @@ namespace Spice
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            services.AddAuthentication().AddFacebook(FacebookOptions =>
+            {
+                FacebookOptions.AppId = "3470414639636004";
+                FacebookOptions.AppSecret = "5631207aef58f936b5203a854e4dc5a5";
+
+            });
+
+            //Add Session
+            services.AddSession(option =>
+            {
+                option.Cookie.IsEssential = true;
+                option.IdleTimeout = TimeSpan.FromMinutes(30);
+                option.Cookie.HttpOnly = true;
             });
         }
 
@@ -71,7 +92,9 @@ namespace Spice
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //Stripe Secrete key Registration 
+            StripeConfiguration.ApiKey=Configuration.GetSection("Stripe")["Secretkey"];
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
