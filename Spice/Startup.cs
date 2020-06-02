@@ -41,6 +41,8 @@ namespace Spice
             services.AddIdentity<IdentityUser, IdentityRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //add service for database initialization
+            services.AddScoped<IDbInitializer, DBInitializer>();
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             //Add Email Service
             services.AddSingleton<IEmailSender, EmailSender>();
@@ -75,7 +77,7 @@ namespace Spice
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -94,6 +96,8 @@ namespace Spice
             app.UseRouting();
             //Stripe Secrete key Registration 
             StripeConfiguration.ApiKey=Configuration.GetSection("Stripe")["Secretkey"];
+            //initialize db
+            dbInitializer.Initialize();
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();

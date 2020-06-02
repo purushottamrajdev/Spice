@@ -9,6 +9,8 @@ namespace Spice.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        internal object database;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
